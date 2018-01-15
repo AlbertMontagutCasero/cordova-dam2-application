@@ -1,0 +1,11 @@
+.top-buffer { margin-top:1%; }
+
+.arrowBig{
+    width: 100%;
+    height: 100%;
+}
+
+.centered{
+    float: none;
+    margin: 0px auto;
+}

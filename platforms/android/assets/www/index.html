@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+    <head>
+        <!--
+        Customize this policy to fit your own app's needs. For more guidance, see:
+            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+        Some notes:
+            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+                * Enable inline JS: add 'unsafe-inline' to default-src
+        -->
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
+        <link href="css/index.css" rel="stylesheet" type="text/css"/>
+
+        <title>Hello World</title>
+    </head>
+    <body>
+        <div class="panel-group" id="desplegable">
+            <!-- PANEL 1 -->
+            <div class="panel panel-primary">
+                <div class="panel-heading">  
+                    <h4 class="panel-title ">
+                        <a href="#panel1" data-toggle="collapse" data-parent="#desplegable">
+                            Beeps
+                        </a>
+                    </h4>
+                </div>
+                <div id="panel1" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="btn-group col-xs-12">
+                                    <button type="button" id="beepsRestar" class="btn btn-warning col-xs-3">--beeps <span class="glyphicon glyphicon-backward"></span></button>
+                                    <button type="button" id="beepsReproducir" class="btn btn-primary col-xs-6">Reprodueix Beeps <span class="glyphicon glyphicon-bullhorn"></span></button>
+                                    <button type="button" id="beepsSumar" class="btn btn-warning col-xs-3">++beeps <span class="glyphicon glyphicon-forward"></span></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container-fluid top-buffer">
+                            <div class="row">
+                                <div class="col-xs-2 centered">
+                                    <button type="button" id="beepsCounter" class="btn btn-danger disabled"></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- PANEL 2 -->
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a href="#panel2" data-toggle="collapse" data-parent="#desplegable">
+                            orientació
+                        </a> 
+                    </h4>
+                </div>
+                <div id="panel2" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="btn-group col-xs-12">
+                                    <button type="button" id="orientacioEsquerra" class="btn btn-warning col-xs-3">esquerra <span class="glyphicon glyphicon-chevron-left"></span></button>
+                                    <button type="button" id="orientacioGuardar" class="btn btn-primary col-xs-6">Guarda Direcció <span class="glyphicon glyphicon-refresh"></span></button>
+                                    <button type="button" id="orientacioDreta" class="btn btn-warning col-xs-3">dreta <span class="glyphicon glyphicon-chevron-right"></span></button>
+                                </div>
+                            </div>
+                        </div>  
+                        <div class="container-fluid top-buffer">
+                            <div class="row">
+                                <div class="col-xs-4 centered">
+                                    <img id="flecha" class="arrowBig" src="img/uparrow.png" alt=""/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- PANEL 3 -->
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a href="#panel3" data-toggle="collapse" data-parent="#desplegable">
+                            Push Them All
+                        </a>
+                    </h4>
+                </div>
+                <div id="panel3" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <button type="button" id="Start" class="btn btn-primary col-xs-12">Start</button> 
+                        <div id="game">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="js/jquery-3.2.1.min.js" type="text/javascript"></script>
+        <script src="js/npm.js" type="text/javascript"></script>
+        <script src="js/bootstrap.min.js" type="text/javascript"></script>
+        <script type="text/javascript" src="cordova.js"></script>
+        <script src="js/index.js" type="text/javascript"></script>
+        <script src="js/Beeps.js" type="text/javascript"></script>
+        <script src="js/orientacio.js" type="text/javascript"></script>
+        <script src="js/pushThemAll.js" type="text/javascript"></script>
+    </body>
+</html>
