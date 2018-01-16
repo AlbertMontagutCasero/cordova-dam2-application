@@ -9,3 +9,13 @@
     float: none;
     margin: 0px auto;
 }
+.basic{
+    position: absolute;
+    display: inline-block;
+}
+
+.img{
+    display: inline-block;
+    height: 50px;
+    width: 50px;
+}
