@@ -9,13 +9,13 @@
     float: none;
     margin: 0px auto;
 }
-.basic{
+.basic, .trap, .clean{
     position: absolute;
     display: inline-block;
 }
 
 .img{
     display: inline-block;
-    height: 50px;
-    width: 50px;
+    height: 100px;
+    width: 100px;
 }

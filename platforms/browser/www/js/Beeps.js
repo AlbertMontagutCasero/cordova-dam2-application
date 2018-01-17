@@ -6,7 +6,9 @@ $(document).ready(function () {
     $("#beepsRestar").click(botonIzquierdaBeeps);
     $("#beepsSumar").click(botonDerechaBeeps);
     $("#beepsReproducir").click(vibrar);
-    console.log("hi");
+    
+    //TODO refactor for beep not vibrate
+    //TODO refactor movement
 });
 function botonIzquierdaBeeps() {
     moverIzquierda();
@@ -34,7 +36,6 @@ function sumarBeeps()
     console.log(numBeeps);
     if (numBeeps >= 5)
     {
-        console.log("beeps es mayor que 5");
         return;
     }
     numBeeps++;

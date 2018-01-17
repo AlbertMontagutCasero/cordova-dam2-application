@@ -1,13 +1,14 @@
 var degFlecha = 0;
 var globaldeg;
-var savedeg = 0;
 var watchID;
-var desviationRange;
+var aux = true;
+// var desviationRange;
 
 $(document).ready(function () {
+    //rotar imagen
     $("#orientacioEsquerra").click(botonIzquierdaOrientacio);
     $("#orientacioDreta").click(botonDerechaOrientacio);
-    $("#orientacioGuardar").click(Ex3());
+    $("#orientacioGuardar").click(direccion);
 });
 
 function botonIzquierdaOrientacio() {
@@ -32,15 +33,25 @@ function rotarFlechita() {
     document.getElementById('flecha').style.transform = "rotate(" + degFlecha + "deg)";
 }
 
-function Ex3() {
-    initCompass();
-
+function rotarFlechitaAZero() {
+    console.log(degFlecha);
+    document.getElementById('flecha').style.transform = "rotate(" + 0 + "deg)";
+}
+function direccion() {
+    if (!watchID) 
+    {
+        initCompass();
+    } else
+    {
+        stop();
+    }
 }
 
 function initCompass() {
-    var options = {frequency: 500};
-    watchID = navigator.compass.watchHeading(onSuccess, onError, options);
 
+    var options = {frequency: 250};
+    watchID = navigator.compass.watchHeading(onSuccess, onError, options);
+    rotarFlechitaAZero();
 }
 function onError() {
     alert("EROOOOR");
@@ -48,31 +59,31 @@ function onError() {
 
 function onSuccess(heading) {
     globaldeg = heading.magneticHeading;
-    globaldeg = -globaldeg;
-    desviationRange = parseInt(globaldeg) + degFlecha;
-    console.log("saveDeg: " + savedeg);
+    // volver la flecha a apuntar al 0
+    // desviationRange = parseInt(globaldeg) + degFlecha;
+    // console.log("DesviationRange: "+ desviationRange);
     console.log("degFlecha: " + degFlecha);
-    console.log("DesviationRange: "+ desviationRange);
-    console.log("GlobalDeg: "+globaldeg);
+    console.log("Watch ID: " + watchID);
+    console.log("GlobalDeg: " + globaldeg);
+    console.log("degFlecha nega: " + (degFlecha - 5));
+    console.log("degFlecha nega: " + (degFlecha + 5));
 
-    if (watchID !== null && parseInt(savedeg) <= (degFlecha + 5) && parseInt(savedeg) >= (degFlecha - 5)) {
-        navigator.vibrate(2000);
-    }
-    console.log("global " + globaldeg + "Save " + savedeg + "watchID") + watchID;
-}
-
-function save() {
-    console.log("HIIIIIIIIII");
-    if (watchID) {
-        savedeg = globaldeg;
+    var degFlechaMeno = degFlecha - 5;
+    var degFlechaMayo = degFlecha + 5;
+    
+    if (watchID != null && parseInt(globaldeg) >= degFlechaMeno
+            && parseInt(globaldeg) <= degFlechaMayo) {
+        alert("Enhorabuena, estas apuntando en la direccion indicada previamente");
     }
 }
 
-function stop(watchID) {
+function stop() {
     if (watchID) {
         navigator.compass.clearWatch(watchID);
         watchID = null;
         globaldeg = null;
-        savedeg = null;
+        aux = true;
+        rotarFlechita();
     }
+
 }

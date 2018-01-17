@@ -1,57 +1,63 @@
+var numBallsSpawn = 0;
+var numItemsInGame = 0;
+var intervalID;
 $(document).ready(function () {
     $("#Start").click(playGame);
-    $(".basic").click(destroy);
+
 });
-var numBallsSpawn = 0;
-var numBallsInGame = 0;
 
 function playGame() {
+    //crear barra items 
+    var div = " <div id='game'> ";
+    $("#game").remove();
+    $("#gamePanel").append(div);
     var screenHeight = $(window).height();
     var gameSpaceHeight = (screenHeight - $("#desplegable").height()) - 5;
-    var gameSpaceWith = $(window).width();
     $("#game").css({
         height: gameSpaceHeight,
         "margin-top": "40px"
     });
-    var numBallsSpawn = 0;
-    var numBallsInGame = 0;
+    //crear barra items 
     var i = 0;
     //timer 
-    setInterval(function () {
-        if (numBallsInGame < 10) {
+    intervalID = setInterval(function () 
+    {
+        console.log("hi");
+        if (numItemsInGame < 10) {
             if (i < 6)
             {
                 numBallsSpawn++;
             }
-            numBallsInGame += numBallsSpawn;
-            console.log("");
-            console.log(i);
+            $(".clean").remove();           
+            
+            numItemsInGame += numBallsSpawn;
             for (var j = 0; j < numBallsSpawn; j++) {
                 spawnBasic();
-                console.log("Basic");
             }
             console.log("");
-            if ((i % 5) == 0)
+            if ((i % 10) == 0)
             {
-                console.log("Clean");
                 spawnClean();
+                numItemsInGame++;
             }
 
             if ((i % 2) == 0)
             {
-                console.log("Trap");
                 spawnTrap();
+                numItemsInGame++;
             }
+            //actualizar items
+        } else
+        {
+            endGame();
         }
         i++;
-    }, 1000);
+    }, 3000);
 }
 
 function spawnBasic() {
-    var numRand = Math.floor(Math.random() * 501);
-    var divsize = 100;
-    var posx = (Math.random() * ($("#game").width() - divsize)).toFixed();
-    var posy = (Math.random() * ($("#game").height() - divsize)).toFixed();
+    var posx = (Math.random() * $("#game").width()).toFixed();
+    var posy = ((Math.random() * $("#game").height()) + $("#desplegable").height() - $("#game").height() - 35).toFixed();
 
     $basic = $("<div class='basic'> <img class='img' src='img/Ball.png'/> </div>").css({
         'left': posx + 'px',
@@ -59,19 +65,50 @@ function spawnBasic() {
     });
 
     $basic.appendTo($("#game"));
+    $basic.click(destroy);
 }
 
 function destroy() {
     $(this).remove();
-    numBallsInGame--;
+    numItemsInGame--;
+}
+
+function destroyAllBasicItems() {
+    $(".basic").remove();
+    $(".trap").remove();
+    numItemsInGame = 0;
+}
+
+function endGame() {
+    $("#game").remove();
+    numItemsInGame = 0;
+    numBallsSpawn = 0;
+    clearInterval(intervalID);
+    //borrar barra
 }
 
 function spawnTrap() {
-    var trap = " <div class='trap'> ";
-    $("#game").append(trap);
+    var posx = (Math.random() * $("#game").width()).toFixed();
+    var posy = ((Math.random() * $("#game").height()) + $("#desplegable").height() - $("#game").height() - 35).toFixed();
+
+    $trap = $("<div class='trap'> <img class='img' src='img/Trap.png'/> </div>").css({
+        'left': posx + 'px',
+        'top': posy + 'px'
+    });
+    $trap.appendTo($("#game"));
+    $trap.click(endGame);
 }
 
 function spawnClean() {
-    var clean = " <div class='clean'> ";
-    $("#game").append(clean);
+    var posx = (Math.random() * $("#game").width()).toFixed();
+    var posy = ((Math.random() * $("#game").height()) + $("#desplegable").height() - $("#game").height() - 35).toFixed();
+
+    $clean = $("<div class='clean'> <img class='img' src='img/Clean.png'/> </div>").css({
+        'left': posx + 'px',
+        'top': posy + 'px'
+    });
+    
+    $clean.appendTo($("#game"));
+    
+    $clean.click(destroyAllBasicItems);
 }

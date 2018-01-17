@@ -5,7 +5,10 @@ $(document).ready(function () {
     $("#beepsCounter").text(stringCounterBeeps + numBeeps);
     $("#beepsRestar").click(botonIzquierdaBeeps);
     $("#beepsSumar").click(botonDerechaBeeps);
-    $("#beepsReproducir").click(vibrar);
+    $("#beepsReproducir").click(notificar);
+    
+    //TODO refactor for beep not vibrate
+    //TODO refactor movement
 });
 function botonIzquierdaBeeps() {
     moverIzquierda();
@@ -33,16 +36,14 @@ function sumarBeeps()
     console.log(numBeeps);
     if (numBeeps >= 5)
     {
-        console.log("beeps es mayor que 5");
         return;
     }
     numBeeps++;
     $("#beepsCounter").text(stringCounterBeeps + numBeeps);
 }
 
-function vibrar() {
-    console.log("numBeeps : " + numBeeps + " vibrara " + numBeeps * 1000 + " segundos");
-    navigator.vibrate(numBeeps * 1000);
+function notificar() {
+    navigator.notification.beep(numBeeps);
 }
 
 function moverIzquierda()

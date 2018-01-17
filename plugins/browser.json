@@ -15,6 +15,9 @@
     },
     "cordova-plugin-device-orientation": {
       "PACKAGE_NAME": "com.Montagut.Albert"
+    },
+    "cordova-plugin-dialogs": {
+      "PACKAGE_NAME": "com.Montagut.Albert"
     }
   },
   "dependent_plugins": {}
